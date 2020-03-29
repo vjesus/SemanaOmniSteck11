@@ -45,24 +45,25 @@ module.exports = {
 
         console.log('Vou deletar');
 
-        const incidents = await connection('incidents')
+        const incident = await connection('incidents')
             .where('id', id)
             .select('ong_id')
             .first();
 
             console.log('Achei o id');
 
-        if (incidents.ong_id != ong_id) {
+        if (incident.ong_id !== ong_id) {
             console.log('comparei e é diferente');
             return response.status(401).json({error: 'Operation not permitted.'});
         }
-
-        Console.log('Comparei e é igual');
+        
+        console.log('Comparei e é igual');
 
         await connection('incidents').where('id',id).delete();
-        console.log('Deletei');
+        console.log('Deletei o registro');
         
-        return response.status(204).send;
+        return response.status(204).send();
 
+        
     }
 };
